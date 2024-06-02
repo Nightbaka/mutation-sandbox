@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'experiments',
+    'users',
     'channels',
     'django.contrib.sites',
     'allauth',
