@@ -3,3 +3,4 @@ djangorestframework
 neat-python
 gymnasium[classic-control]
 numpy
+django-allauth
