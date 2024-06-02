@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Experiment from '../views/Experiment.vue';
 import History from '../views/History.vue';
 // import AuthCallback from '../views/AuthCallback.vue'
-import login from '../components/login'
+import userLogin from '../components/userLogin.vue'
+import userManager from '@/services/userManager';
 
 const routes = [
   {
@@ -26,7 +27,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: userLogin
   },
 ];
 
