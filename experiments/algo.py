@@ -2,7 +2,6 @@ import numpy as np
 import os
 
 import neat
-import visualize
 import gymnasium
 import random
 
@@ -70,16 +69,3 @@ class Cartpole(Game):
                 self.env.close()
                 self.genome_saver.end(genome, i, self.ideal_pos, observation)
                 break
-
-class ConfigBuilder:
-    def __init__(self, config_file):
-        self.config_file = config_file
-        self.config = None
-
-    def get(self):
-        self.config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
-                           neat.DefaultSpeciesSet, neat.DefaultStagnation,
-                           self.config_file)
-    
-    def set(self):
-        self.config = config
