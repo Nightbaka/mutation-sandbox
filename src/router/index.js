@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Experiment from '../views/Experiment.vue';
 import History from '../views/History.vue';
-// import AuthCallback from '../views/AuthCallback.vue'
+import AuthCallback from '../views/AuthCallback.vue'
 import userLogin from '../components/userLogin.vue'
 import userManager from '@/services/userManager';
 
@@ -29,6 +29,8 @@ const routes = [
     name: 'Login',
     component: userLogin
   },
+  { path: '/callback',
+   component: AuthCallback }
 ];
 
 const router = createRouter({

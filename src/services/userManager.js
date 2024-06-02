@@ -9,4 +9,14 @@ const userManager = new UserManager({
   post_logout_redirect_uri: 'http://localhost:8000/',
 });
 
-export default userManager;
+const signIn = () => userManager.signinRedirect();
+const signOut = () => userManager.signoutRedirect();
+const getUser = () => userManager.getUser();
+
+
+
+export default {
+  signIn,
+  signOut,
+  getUser,
+};
