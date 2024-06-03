@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Experiment from '../views/Experiment.vue';
 import History from '../views/History.vue';
-import AuthCallback from '../views/AuthCallback.vue'
+// import AuthCallback from '../views/AuthCallback.vue'
 import userLogin from '../components/userLogin.vue'
-import userManager from '@/services/userManager';
+// import userManager from '@/services/userManager';
 
 const routes = [
   {
@@ -29,8 +29,8 @@ const routes = [
     name: 'Login',
     component: userLogin
   },
-  { path: '/callback',
-   component: AuthCallback }
+  // { path: '/callback',
+  //  component: AuthCallback }
 ];
 
 const router = createRouter({
@@ -38,17 +38,6 @@ const router = createRouter({
   routes
 });
 
-router.beforeEach(async (to, from, next) => {
-  const user = await userManager.getUser();
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (user && !user.expired) {
-      next();
-    } else {
-      next({ name: 'Login', query: { redirect: to.fullPath } });
-    }
-  } else {
-    next();
-  }
-});
+
 
 export default router;

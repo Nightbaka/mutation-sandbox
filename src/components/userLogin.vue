@@ -1,22 +1,27 @@
-<template>
-    <div>
-      <button @click="login">Login with Google</button>
-    </div>
-  </template>
+<script setup>
+import { decodeCredential } from 'vue3-google-login'
+import axios from 'axios'
+const callback = (response) => {
   
-  <script setup>
-  import userManager from '@/services/userManager';
-  import { useRouter } from 'vue-router';
-  
-  const router = useRouter();
-  
-  function login() {
-    userManager.signIn().then(() => {
-      const redirect = router.currentRoute.value.query.redirect || '/';
-      router.push(redirect);
-    }).catch(error => {
-      console.error('Login failed:', error);
+  const userData = decodeCredential(response.credential)
+  console.log("Handle the userData", userData)
+
+  sendUserDataToBackend(userData)
+};
+
+function sendUserDataToBackend(userData) {
+  axios.post('http://localhost:8000/auth/', userData)
+    .then(response => {
+      console.log('User data saved:', response.data);
+      // Handle response from the backend (e.g., navigate to another page)
+    })
+    .catch(error => {
+      console.error('Failed to save user data:', error);
+      // Handle errors here
     });
-  }
-  </script>
-  
+}
+</script>
+
+<template>
+  <GoogleLogin :callback="callback" prompt/>
+</template>
