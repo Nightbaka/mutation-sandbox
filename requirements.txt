@@ -4,3 +4,4 @@ neat-python
 gymnasium[classic-control]
 numpy
 django-allauth
+requests
