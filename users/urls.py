@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import receive_user_data
+from .views import receive_login_data
+from .views import receive_registration_data
 
 from users import views
 
 
 urlpatterns = [
-    path('', receive_user_data, name="auth-endpoint"),
+    path('login', receive_login_data, name="login-endpoint"),
+    path('register', receive_registration_data, name="registration-endpoint"),
 ]
