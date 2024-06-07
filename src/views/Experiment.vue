@@ -10,8 +10,7 @@
     name: 'UserProfile',
     data() {
       return {
-        username: 'Niggalini',
-        bio: 'Just a Vue enthusiast.'
+        username: '***Experiments***'
       };
     }
   }

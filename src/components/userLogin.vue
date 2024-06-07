@@ -1,27 +1,52 @@
-<script setup>
-import { decodeCredential } from 'vue3-google-login'
-import axios from 'axios'
-const callback = (response) => {
-  
-  const userData = decodeCredential(response.credential)
-  console.log("Handle the userData", userData)
+<template>
+  <div>
+    <GoogleLogin :callback="callback" prompt />
+    <div v-if="errorMessage" class="error-message">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+</template>
 
-  sendUserDataToBackend(userData)
+<script setup>
+import { ref } from 'vue';
+import { decodeCredential } from 'vue3-google-login';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+import { useUserStore } from '@/stores/user';
+
+const userData = ref(null);
+const errorMessage = ref(null);
+const router = useRouter();
+const { setUser } = useUserStore()
+
+const callback = (response) => {
+  const decodedData = decodeCredential(response.credential);
+  console.log("Handle the userData", decodedData);
+  sendUserDataToBackend(decodedData);
 };
 
-function sendUserDataToBackend(userData) {
-  axios.post('http://localhost:8000/auth/', userData)
+function sendUserDataToBackend(decodedData) {
+  axios.post('http://localhost:8000/auth/login', decodedData)
     .then(response => {
       console.log('User data saved:', response.data);
-      // Handle response from the backend (e.g., navigate to another page)
+      userData.value = response.data.data;
+      console.log('Data?: ', response.data.data)
+
+      //refactor to function?
+      setUser(response.data.data);
+
+      router.push('/experiment');
     })
     .catch(error => {
       console.error('Failed to save user data:', error);
-      // Handle errors here
+
+      errorMessage.value = 'Something went wrong. Please choose other user, or try registering';
     });
 }
 </script>
 
-<template>
-  <GoogleLogin :callback="callback" prompt/>
-</template>
+<style>
+.error-message {
+  color: red;
+}
+</style>

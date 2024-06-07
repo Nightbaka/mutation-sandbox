@@ -1,18 +1,12 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <nav>
-      <router-link to="/experiment">Experiment</router-link>
-      <router-link to="/history">History</router-link>
-    </nav>
-    <router-view/>
+    <TopNavbar />
+    <router-view />
   </div>
 </template>
 
-<script>
-export default {
-  name: 'App'
-}
+<script setup>
+import TopNavbar from './components/TopNavbar.vue';
 </script>
 
 <style>
