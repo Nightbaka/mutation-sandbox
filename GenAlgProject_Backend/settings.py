@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
+ASGI_APPLICATION = 'GenAlgProject_Backend.asgi.application'
+
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = (
@@ -90,8 +92,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'GenAlgProject_Backend.wsgi.application'
-
-ASGI_APPLICATION = 'GenAlgProject_Backend.asgi.application'
 
 # Set up channel layer
 CHANNEL_LAYERS = {
