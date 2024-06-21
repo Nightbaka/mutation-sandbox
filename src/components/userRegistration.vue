@@ -1,12 +1,24 @@
-<script setup>
-import { decodeCredential } from 'vue3-google-login'
-import axios from 'axios'
-const callback = (response) => {
-  
-  const userData = decodeCredential(response.credential)
-  console.log("Handle the userData", userData)
+<template>
+  <div>
+    <GoogleLogin :callback="callback" prompt />
+    <div v-if="errorMessage" class="error-message">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+</template>
 
-  sendUserDataToBackend(userData)
+<script setup>
+import { ref } from 'vue';
+import { decodeCredential } from 'vue3-google-login';
+import axios from 'axios';
+
+const errorMessage = ref('');
+
+const callback = (response) => {
+  const userData = decodeCredential(response.credential);
+  console.log("Handle the userData", userData);
+
+  sendUserDataToBackend(userData);
 };
 
 function sendUserDataToBackend(userData) {
@@ -17,11 +29,13 @@ function sendUserDataToBackend(userData) {
     })
     .catch(error => {
       console.error('Failed to save user data:', error);
-      // Handle errors here
+      errorMessage.value = 'Failed to save user data. Try logging in instead.'; // Set the error message
     });
 }
 </script>
 
-<template>
-  <GoogleLogin :callback="callback" prompt/>
-</template>
+<style>
+.error-message {
+  color: red;
+}
+</style>

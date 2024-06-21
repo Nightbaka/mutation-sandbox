@@ -1,6 +1,7 @@
 <template>
     <div class="gen-alg-stats">
       <h2>Genetic Algorithm Run Statistics</h2>
+      <HistoryWebsocket @update-runs="updateRuns"/>
       <table>
         <thead>
           <tr>
@@ -13,9 +14,9 @@
         <tbody>
           <tr v-for="run in runs" :key="run.id">
             <td>{{ run.id }}</td>
-            <td>{{ run.bestFitness.toFixed(2) }}</td>
-            <td>{{ run.avgFitness.toFixed(2) }}</td>
-            <td>{{ run.generations }}</td>
+            <td>{{ run.best_fitness.toFixed(2) }}</td>
+            <td>{{ run.avg_fitness.toFixed(2) }}</td>
+            <td>{{ run.num_pops }}</td>
           </tr>
         </tbody>
       </table>
@@ -23,18 +24,29 @@
   </template>
   
   <script>
+  import HistoryWebsocket from '../components/HistoryWebsocket.vue';
   export default {
+    components:{
+      HistoryWebsocket
+    },
     name: 'GeneticAlgorithmStats',
     data() {
       return {
         runs: [
-          { id: 1, bestFitness: 0.98, avgFitness: 0.76, generations: 50 },
-          { id: 2, bestFitness: 0.99, avgFitness: 0.78, generations: 55 },
-          { id: 3, bestFitness: 0.97, avgFitness: 0.74, generations: 53 }
+          // { id: 1, bestFitness: 0.98, avgFitness: 0.76, generations: 50 },
+          // { id: 2, bestFitness: 0.99, avgFitness: 0.78, generations: 55 },
+          // { id: 3, bestFitness: 0.97, avgFitness: 0.74, generations: 53 }
         ]
       };
+    },
+    methods: {
+      updateRuns(newData){
+        this.runs = newData
+        console.log(newData)
+      }
     }
   }
+
   </script>
   
   <style scoped>

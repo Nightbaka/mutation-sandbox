@@ -15,9 +15,9 @@ import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user';
 
 const userData = ref(null);
-const errorMessage = ref(null);
+const errorMessage = ref('');
 const router = useRouter();
-const { setUser } = useUserStore()
+const { setUser } = useUserStore();
 
 const callback = (response) => {
   const decodedData = decodeCredential(response.credential);
@@ -30,17 +30,15 @@ function sendUserDataToBackend(decodedData) {
     .then(response => {
       console.log('User data saved:', response.data);
       userData.value = response.data.data;
-      console.log('Data?: ', response.data.data)
+      console.log('Data?: ', response.data.data);
 
-      //refactor to function?
       setUser(response.data.data);
 
       router.push('/experiment');
     })
     .catch(error => {
       console.error('Failed to save user data:', error);
-
-      errorMessage.value = 'Something went wrong. Please choose other user, or try registering';
+      errorMessage.value = 'Something went wrong. Please choose another user, or try registering.';
     });
 }
 </script>

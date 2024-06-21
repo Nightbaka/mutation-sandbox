@@ -1,7 +1,7 @@
 <template>
-    <!-- <div>
-      <button @click="sendData">Send Data</button>
-    </div> -->
+    <div>
+      <!-- <button @click="sendData">Send Data</button> -->
+    </div>
   </template>
   
   <script>
@@ -18,11 +18,12 @@
   
         this.socket.onopen = () => {
           console.log('WebSocket connected');
+          this.socket.send(JSON.stringify({ message: 'Dawaj dane' }));
         };
   
         this.socket.onmessage = (event) => {
-          const message = JSON.parse(event.data);
-          console.log('Message from server:', message);
+          const data = JSON.parse(event.data);
+          console.log('Message from server:', data);
           this.$emit('update-runs', data)
         };
   
