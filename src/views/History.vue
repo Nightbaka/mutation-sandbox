@@ -1,6 +1,6 @@
 <template>
     <div class="gen-alg-stats">
-      <h2>Genetic Algorithm Run Statistics</h2>
+      <h2>Genetic Algorithm Historic Runs</h2>
       <HistoryWebsocket @update-runs="updateRuns"/>
       <table>
         <thead>
