@@ -14,7 +14,7 @@
     },
     methods: {
       connectWebSocket() {
-        this.socket = new WebSocket('ws://localhost:8000/ws/experiment/');
+        this.socket = new WebSocket('ws://localhost:8000/ws/history/');
   
         this.socket.onopen = () => {
           console.log('WebSocket connected');
