@@ -1,7 +1,8 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from django.core.serializers import serialize
-
+import django
+django.setup()
 from .models import Experiment
 from .serializers import ExperimentSerializer
 from django.db import connection, models

@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# 'GenAlgProject_Backend.apps.myAppNameConfig',
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,6 +48,10 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'corsheaders',
 ]
+
+# import django
+# django.setup()
+
 
 ASGI_APPLICATION = 'GenAlgProject_Backend.asgi.application'
 
@@ -73,6 +77,8 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'GenAlgProject_Backend.urls'
+
+LOGGING_CONFIG = None
 
 TEMPLATES = [
     {
